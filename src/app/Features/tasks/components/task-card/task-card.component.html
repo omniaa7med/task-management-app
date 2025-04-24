@@ -1,0 +1,23 @@
+<div class="bg-white rounded-xl shadow mb-5 p-4 border border-gray-200 hover:shadow-md cursor-move" cdkDrag
+  [cdkDragData]="task">
+  <h4 class="text-base font-semibold text-gray-800 mb-1">
+    {{ task.title }}
+  </h4>
+
+  <p class="text-sm text-gray-600 mb-2">
+    {{ task.description }}
+  </p>
+
+  <p class="text-xs text-gray-500 mb-3 flex items-center gap-1">
+    {{ task.dueDate | date : 'd MMMM, y'}}
+  </p>
+
+  <div class="task-actions flex gap-2 justify-end">
+    <button mat-icon-button class="text-blue-500 hover:text-blue-700 transition" (click)="editTask.emit(task)">
+      Edit
+    </button>
+    <button mat-icon-button class="text-red-500 hover:text-red-700 transition" (click)="deleteTask.emit(task.id)">
+      Delete
+    </button>
+  </div>
+</div>

@@ -2,3 +2,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.cdk-drag-preview {
+  transition: all 0.02s ease;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.8;
+}
+
+.cdk-drag:active {
+  transform: scale(1.05);
+}

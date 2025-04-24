@@ -1,5 +1,7 @@
 <div class="space-y-2 overflow-y-auto min-h-[550px] max-h-[550px] pr-2 custom-scroll" cdkDropList [id]="title"
   [cdkDropListConnectedTo]="connectedDropLists" (cdkDropListDropped)="onDrop($event)">
-  <app-task-card *ngFor="let task of tasks" [task]="task" (deleteTask)="removeTask.emit($event)"
+  @for (task of tasks; track $index) {
+  <app-task-card [task]="task" (deleteTask)="removeTask.emit($event)"
     (editTask)="editTask.emit($event)"></app-task-card>
+  }
 </div>

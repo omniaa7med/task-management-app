@@ -16,6 +16,7 @@ export class TaskFormComponent {
   taskStatus = TaskStatus;
   taskForm!: FormGroup;
   todayDate: any;
+
   constructor(private fb: FormBuilder, private datePipe: DatePipe) {}
 
   ngOnInit() {

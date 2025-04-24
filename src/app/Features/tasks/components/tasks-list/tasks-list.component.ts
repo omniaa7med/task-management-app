@@ -11,17 +11,15 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 export class TasksListComponent {
   @Input() title!: Task['status'];
   @Input() tasks: Task[] | any = [];
-
   @Output() taskDropped = new EventEmitter<{
     task: Task;
     newStatus: Task['status'] | string;
   }>();
-
   @Output() removeTask = new EventEmitter<string>();
   @Output() editTask = new EventEmitter<Task>();
   @Input() connectedDropLists!: Task['status'][];
 
-  ngOnInit() {
+  ngOnChanges() {
     this.tasks = this.sortDueDate();
   }
   // sort tasks by date Asc

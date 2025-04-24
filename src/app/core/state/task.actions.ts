@@ -20,6 +20,6 @@ export class DeleteTask {
 }
 
 export class UpdateTaskStatus {
-  static readonly type = '[Tasks] Update Status';
+  static readonly type = '[Tasks] Reorder';
   constructor(public id: string, public newStatus: Task['status'] | string) {}
 }

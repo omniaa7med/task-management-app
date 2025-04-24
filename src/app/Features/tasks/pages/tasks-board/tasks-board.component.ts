@@ -32,9 +32,17 @@ export class TasksBoardComponent {
   taskToDelete!: Task['id'];
   taskList!: TaskList[];
 
-  constructor(private store: Store) {
-    // get all tasks
+  constructor(private store: Store) {}
+
+  ngOnInit() {
+    this.handleTaskState();
+    this.taskList = this.createTaskList();
+  }
+
+  handleTaskState() {
     this.store.dispatch(new LoadTasks());
+
+    // get tasks by status
     this.todo$ = this.store.select(
       TaskSelectors.selectTasksByStatus(TaskStatus.ToDo)
     );
@@ -44,8 +52,10 @@ export class TasksBoardComponent {
     this.done$ = this.store.select(
       TaskSelectors.selectTasksByStatus(TaskStatus.Done)
     );
+  }
 
-    this.taskList = [
+  createTaskList() {
+    return [
       {
         title: this.taskStatus.ToDo,
         connectedDropLists: [this.taskStatus.InProgress, this.taskStatus.Done],

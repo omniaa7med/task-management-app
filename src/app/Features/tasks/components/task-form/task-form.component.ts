@@ -16,13 +16,20 @@ export class TaskFormComponent {
   taskStatus = TaskStatus;
   taskForm!: FormGroup;
   todayDate: any;
-  constructor(private fb: FormBuilder, private datePipe: DatePipe) {
+  constructor(private fb: FormBuilder, private datePipe: DatePipe) {}
+
+  ngOnInit() {
+    this.getTodayDate();
+    this.buildTaskForm();
+  }
+
+  getTodayDate() {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     this.todayDate = this.datePipe.transform(today, 'yyyy-MM-dd');
   }
 
-  ngOnInit() {
+  buildTaskForm() {
     const initial: Task | any = this.task || {};
     this.taskForm = this.fb.group({
       title: [initial.title || '', [Validators.required]],

@@ -1,0 +1,30 @@
+<div class="p-5 md:p-4">
+  <div class="add-task-btn mb-6 text-right">
+    <button (click)="openTaskForm()"
+      class="px-6 py-2 bg-blue-600 text-white text-sm font-semibold rounded-full shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 -all">
+      Add Task
+    </button>
+  </div>
+
+  <div class="board grid gap-6 sm:grid-cols-1 md:grid-cols-3">
+    @for (taskListitem of taskList; track $index) {
+    <div class="task-column bg-white rounded-2xl shadow-lg p-4 border border-gray-200 hover:shadow-xl">
+      <h2 class="text-lg font-bold text-gray-700 mb-3" [ngClass]="[taskListitem.titleColor]">
+        {{ taskListitem.title }}
+      </h2>
+      <app-tasks-list [title]="taskListitem.title" [tasks]="taskListitem.tasks| async"
+        [connectedDropLists]="taskListitem.connectedDropLists" (taskDropped)="onTaskDrop($event)"
+        (removeTask)="deleteTask($event)" (editTask)="openTaskForm($event)"></app-tasks-list>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- task form -->
+<app-task-form *ngIf="openFormTask" [task]="taskToEdit" (formSubmitted)="handleFormSubmit($event)"
+  (cancelled)="closeDialog()" />
+
+
+
+<!-- confirm dialog -->
+<app-confirm-dialog *ngIf="isConfirmOpen" (actionConfirmed)="handleDeleteTaskAfterConfirm($event)" />

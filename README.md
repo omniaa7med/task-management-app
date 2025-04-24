@@ -1,6 +1,32 @@
-# TaskManagementApp
+# TaskManagement
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.8.
+simple task management board using
+
+[![Generic badge](https://img.shields.io/badge/Angular-19.2.0-red.svg)](https://shields.io/)
+
+[![Generic badge](https://img.shields.io/badge/ngxs/store-19.0.0-o.svg)](https://shields.io/)
+
+[![Generic badge](https://img.shields.io/badge/tailwindcss-3.4.17-purple.svg)](https://shields.io/)
+
+, with three columns representing
+
+### Different task status:
+
+```bash
+To Do, In Progress, and Done
+```
+
+### The app must support full CRUD
+
+```bash
+get all tasks,add new task , edit task , delete task,update status
+```
+
+### Operations via simulated RESTful API calls
+
+```bash
+by use https://mockapi.io/
+```
 
 ## Development server
 
@@ -12,20 +38,6 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
 ## Building
 
 To build the project run:
@@ -36,24 +48,8 @@ ng build
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## To build to github pages
 
 ```bash
-ng test
+ng deploy
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

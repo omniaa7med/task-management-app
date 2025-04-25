@@ -1,6 +1,6 @@
 <div class="relative bg-white rounded-xl shadow mb-5 p-4 border border-gray-200 hover:shadow-md cursor-move" cdkDrag
   [cdkDragData]="task">
-  <h4 class="text-base font-semibold text-gray-800 mb-1">
+  <h4 class="truncate w-[180px] text-base font-semibold text-gray-800 mb-1">
     {{ task.title }}
   </h4>
 
@@ -12,7 +12,7 @@
     {{ task.status }}
   </span>
 
-  <p class="text-sm text-gray-600 mb-2">
+  <p class="truncate max-w-xs text-sm text-gray-600 mb-2">
     {{ task.description }}
   </p>
 

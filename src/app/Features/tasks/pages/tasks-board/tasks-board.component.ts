@@ -14,6 +14,7 @@ import {
   DeleteTask,
 } from '../../../../core/state/task.actions';
 import { TaskSelectors } from '../../../../core/state/task.selectors';
+import { ToastNotifService } from '../../../../core/services/toast-notifi.service';
 
 @Component({
   selector: 'app-tasks-board',
@@ -32,7 +33,10 @@ export class TasksBoardComponent {
   taskToDelete!: Task['id'];
   taskList!: TaskList[];
 
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    private _toastNotifiService: ToastNotifService
+  ) {}
 
   ngOnInit() {
     this.handleTaskState();
@@ -80,6 +84,8 @@ export class TasksBoardComponent {
   // update task status when drop
   onTaskDrop(event: { task: Task; newStatus: Task['status'] | string }) {
     this.store.dispatch(new UpdateTaskStatus(event.task.id, event.newStatus));
+    if (event.newStatus === this.taskStatus.Done)
+      this.toastNotifiTaskDone(event.task);
   }
 
   // open form dialog to handle add or edit
@@ -91,6 +97,7 @@ export class TasksBoardComponent {
   // Handle form submission
   handleFormSubmit(task: Task) {
     this.store.dispatch(task.id ? new UpdateTask(task) : new CreateTask(task));
+    if (task.status === this.taskStatus.Done) this.toastNotifiTaskDone(task);
     this.closeDialog();
   }
 
@@ -110,5 +117,10 @@ export class TasksBoardComponent {
   handleDeleteTaskAfterConfirm(confirmed: boolean) {
     if (confirmed) this.store.dispatch(new DeleteTask(this.taskToDelete));
     this.isConfirmOpen = false;
+  }
+
+  // handle toast notification when task is done
+  toastNotifiTaskDone(task: Task) {
+    this._toastNotifiService.show(`${task.title} is done`);
   }
 }

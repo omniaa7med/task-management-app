@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TasksBoardComponent } from './tasks-board.component';
+import { TasksBoardComponent } from './tasks-board/tasks-board.component';
 
 const routes: Routes = [
   {

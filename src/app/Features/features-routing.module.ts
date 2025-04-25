@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./tasks/pages/tasks-board/tasks-board.module').then(
+      import('./tasks/pages/tasks-board.module').then(
         (m) => m.TasksBoardModule
       ),
   },

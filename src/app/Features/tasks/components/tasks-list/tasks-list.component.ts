@@ -13,7 +13,7 @@ export class TasksListComponent {
   @Input() tasks: Task[] | any = [];
   @Output() taskDropped = new EventEmitter<{
     task: Task;
-    newStatus: Task['status'] | string;
+    newStatus: Task['status'];
   }>();
   @Output() removeTask = new EventEmitter<string>();
   @Output() editTask = new EventEmitter<Task>();
@@ -32,8 +32,8 @@ export class TasksListComponent {
   // handle drop task in container
   onDrop(event: CdkDragDrop<Task[]>) {
     const task = event.item.data;
-    const newStatus: Task['status'] | string = event.container.id;
-    if (newStatus) {
+    const newStatus: any = event.container.id;
+    if (newStatus && event.container.id != event.item.data.status) {
       this.taskDropped.emit({ task, newStatus });
     }
   }

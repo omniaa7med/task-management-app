@@ -8,8 +8,8 @@ import { Task } from '../interfaces/task-model';
 })
 export class TaskApiService {
   // use it if dev mode
-  private apiUrl = 'http://localhost:3000/tasks';
-  // private apiUrl = 'https://freckle-humble-packet.glitch.me/tasks';
+  // private apiUrl = 'http://localhost:3000/tasks';
+  private apiUrl = 'https://freckle-humble-packet.glitch.me/tasks';
   // private apiUrl = 'https://6806890be81df7060eb77cdf.mockapi.io/tasks';
 
   private apiKey = 'taskMangment6262';
@@ -48,7 +48,6 @@ export class TaskApiService {
     //   { status },
     //   { headers: this.headers }
     // );
-
     // use json-server
     return this.http.patch(
       `${this.apiUrl}/${id}`,

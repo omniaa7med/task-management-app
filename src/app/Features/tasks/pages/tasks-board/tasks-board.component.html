@@ -9,10 +9,10 @@
   <div class="board grid gap-6 sm:grid-cols-1 md:grid-cols-3">
     @for (taskListitem of taskList; track $index) {
     <div class="task-column bg-white rounded-2xl shadow-lg p-4 border border-gray-200 hover:shadow-xl">
-      <h2 class="text-lg font-bold text-gray-700 mb-3" [ngClass]="[taskListitem.titleColor]">
-        {{ taskListitem.title }}
+      <h2 class="text-lg font-bold text-gray-700 mb-3" [ngClass]="[taskListitem.statusColor]">
+        {{ taskListitem.status }}
       </h2>
-      <app-tasks-list [title]="taskListitem.title" [tasks]="taskListitem.tasks| async"
+      <app-tasks-list [title]="taskListitem.status" [tasks]="taskListitem.tasks"
         [connectedDropLists]="taskListitem.connectedDropLists" (taskDropped)="onTaskDrop($event)"
         (removeTask)="deleteTask($event)" (editTask)="openTaskForm($event)"></app-tasks-list>
     </div>

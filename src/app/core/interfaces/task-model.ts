@@ -9,10 +9,10 @@ export interface Task {
 }
 
 export interface TaskList {
-  title: TaskStatus;
+  status: TaskStatus;
   connectedDropLists: TaskStatus[];
-  tasks: Observable<Task[]>;
-  titleColor: string;
+  tasks: Task[];
+  statusColor: string;
 }
 
 export enum TaskStatus {

@@ -40,52 +40,62 @@ export class TasksBoardComponent {
 
   ngOnInit() {
     this.handleTaskState();
-    this.taskList = this.createTaskList();
   }
 
   handleTaskState() {
     this.store.dispatch(new LoadTasks());
 
-    // get tasks by status
-    this.todo$ = this.store.select(
-      TaskSelectors.selectTasksByStatus(TaskStatus.ToDo)
-    );
-    this.inProgress$ = this.store.select(
-      TaskSelectors.selectTasksByStatus(TaskStatus.InProgress)
-    );
-    this.done$ = this.store.select(
-      TaskSelectors.selectTasksByStatus(TaskStatus.Done)
-    );
+    // get all tasks and create tasks list ui
+    this.store.select(TaskSelectors.allTasks()).subscribe((tasks: any) => {
+      this.taskList = this.createTaskList(tasks.tasks);
+    });
   }
 
-  createTaskList() {
+  //  create taskList ui
+  createTaskList(allTasks: Task[]): TaskList[] {
     return [
       {
-        title: this.taskStatus.ToDo,
+        status: this.taskStatus.ToDo,
         connectedDropLists: [this.taskStatus.InProgress, this.taskStatus.Done],
-        tasks: this.todo$,
-        titleColor: 'text-blue-600',
+        tasks: allTasks.filter((t) => t.status === this.taskStatus.ToDo),
+        statusColor: 'text-blue-600',
       },
       {
-        title: this.taskStatus.InProgress,
+        status: this.taskStatus.InProgress,
         connectedDropLists: [this.taskStatus.ToDo, this.taskStatus.Done],
-        tasks: this.inProgress$,
-        titleColor: 'text-yellow-600',
+        tasks: allTasks.filter((t) => t.status === this.taskStatus.InProgress),
+        statusColor: 'text-yellow-600',
       },
       {
-        title: this.taskStatus.Done,
+        status: this.taskStatus.Done,
         connectedDropLists: [this.taskStatus.ToDo, this.taskStatus.InProgress],
-        tasks: this.done$,
-        titleColor: 'text-green-600',
+        tasks: allTasks.filter((t) => t.status === this.taskStatus.Done),
+        statusColor: 'text-green-600',
       },
     ];
   }
 
   // update task status when drop
-  onTaskDrop(event: { task: Task; newStatus: Task['status'] | string }) {
-    this.store.dispatch(new UpdateTaskStatus(event.task.id, event.newStatus));
-    if (event.newStatus === this.taskStatus.Done)
-      this.toastNotifiTaskDone(event.task);
+  onTaskDrop(event: { task: Task; newStatus: Task['status'] }) {
+    const updatedTask: Task = { ...event.task, status: event.newStatus };
+
+    // first when drop update ui
+    this.taskList = this.taskList.map((list) => {
+      return {
+        ...list,
+        tasks: list.tasks
+          .filter((task: Task) => task.id !== event.task.id)
+          .concat(list.status === event.newStatus ? [updatedTask] : []),
+      };
+    });
+
+    // secound update api
+    this.store.dispatch(
+      new UpdateTaskStatus(updatedTask.id, updatedTask.status)
+    );
+
+    if (updatedTask.status === this.taskStatus.Done)
+      this.toastNotifiTaskDone(updatedTask);
   }
 
   // open form dialog to handle add or edit

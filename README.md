@@ -51,5 +51,5 @@ This will compile your project and store the build artifacts in the `dist/` dire
 ## To build to github pages
 
 ```bash
-ng deploy
+npm run deploy
 ```

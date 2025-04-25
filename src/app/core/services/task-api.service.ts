@@ -8,7 +8,8 @@ import { status } from './../../../../node_modules/@tinyhttp/send/dist/status';
   providedIn: 'root',
 })
 export class TaskApiService {
-  private apiUrl = 'http://localhost:3000/tasks';
+  // private apiUrl = 'http://localhost:3000/tasks';
+  private apiUrl = 'https://freckle-humble-packet.glitch.me/tasks';
   // private apiUrl = 'https://6806890be81df7060eb77cdf.mockapi.io/tasks';
 
   private apiKey = 'taskMangment6262';
